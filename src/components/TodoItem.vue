@@ -8,6 +8,10 @@ export default {
       type: Object,
       required: true,
     },
+    archived: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -22,7 +26,11 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTodosStore, ["setTodoCompleted", "deleteTodo"]),
+    ...mapActions(useTodosStore, [
+      "setTodoCompleted",
+      "deleteTodo",
+      "refreshArchivedTodo",
+    ]),
   },
 };
 </script>
@@ -45,6 +53,13 @@ export default {
         @click="deleteTodo(todo.id)"
       >
         x
+      </button>
+      <button
+        v-if="this.archived"
+        class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
+        @click="refreshArchivedTodo(todo.id)"
+      >
+        ⬆️
       </button>
     </label>
   </li>

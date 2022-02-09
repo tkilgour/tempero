@@ -1,9 +1,19 @@
 <script>
+import { mapActions } from "pinia";
+import { useTodosStore } from "./stores/todos";
 import TodoList from "./components/TodoList.vue";
 
 export default {
   components: {
     TodoList,
+  },
+
+  methods: {
+    ...mapActions(useTodosStore, ["archiveTodos"]),
+  },
+
+  mounted() {
+    this.archiveTodos();
   },
 };
 </script>
