@@ -25,5 +25,10 @@ export const useTodosStore = defineStore({
       const todo = this.todos.find((todo) => todo.id === id);
       todo.completed = val;
     },
+
+    deleteTodo(id) {
+      const todoIndex = this.todos.findIndex((todo) => todo.id === id);
+      this.todos.splice(todoIndex, 1);
+    },
   },
 });

@@ -22,7 +22,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTodosStore, ["setTodoCompleted"]),
+    ...mapActions(useTodosStore, ["setTodoCompleted", "deleteTodo"]),
   },
 };
 </script>
@@ -35,11 +35,17 @@ export default {
       :id="todo.id"
       v-model="checked"
     />
-    <label
-      class=""
-      :class="this.checked ? 'line-through text-gray-300' : ''"
-      :for="todo.id"
-      >{{ todo.content }}</label
-    >
+    <label :for="todo.id">
+      <span :class="this.checked ? 'line-through text-gray-300' : ''">
+        {{ todo.content }}
+      </span>
+      <button
+        v-if="this.checked"
+        class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
+        @click="deleteTodo(todo.id)"
+      >
+        x
+      </button>
+    </label>
   </li>
 </template>
