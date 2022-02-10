@@ -18,11 +18,16 @@ export default {
 
 <template>
   <div class="max-w-xl mx-auto px-4 mt-8">
-    <ul>
+    <ul class="ml-8">
       <TodoItem v-for="todo in todayTodos" :key="todo.id" :todo="todo" />
     </ul>
     <TodoInput />
-    <h2 class="mt-8 text-xl text-center text-gray-400">Archived</h2>
+    <h2
+      v-if="archivedTodos.length"
+      class="mt-8 text-xl text-center text-gray-400"
+    >
+      Archived
+    </h2>
     <ul>
       <TodoItem
         v-for="todo in archivedTodos"

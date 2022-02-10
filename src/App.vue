@@ -13,6 +13,7 @@ export default {
   },
 
   mounted() {
+    //  TODO: update on date change if app is left running (set a timer? interval?)
     this.archiveTodos();
   },
 };
