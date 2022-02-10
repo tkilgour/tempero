@@ -21,7 +21,7 @@ export default {
 
 <template>
   <main>
-    <h1 class="text-4xl text-center mt-4">ToDo ToDay</h1>
+    <h1 class="text-4xl text-center mt-4">ToDo Today</h1>
     <TodoList />
   </main>
 </template>
