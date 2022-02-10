@@ -28,28 +28,36 @@ export default {
   methods: {
     ...mapActions(useTodosStore, [
       "setTodoCompleted",
+      "updateTodo",
       "deleteTodo",
       "refreshArchivedTodo",
     ]),
+
+    handleUpdate(e) {
+      this.updateTodo(this.todo.id, e.target.innerText);
+    },
   },
 };
 </script>
 
 <template>
-  <li class="flex mb-2 relative">
+  <li class="flex mb-4 md:mb-3 relative">
     <div
-      class="absolute -left-8 top-1 h-4 w-4 p-2 hover:bg-gray-200 ring-offset-2 ring-1 ring-gray-300 rounded-full cursor-pointer"
+      class="absolute -left-10 md:-left-8 top-0 md:top-1 h-6 w-6 md:h-4 md:w-4 ring-offset-2 ring-1 ring-gray-300 rounded-full cursor-pointer"
       :class="{ 'bg-gray-300': checked }"
     >
       <input
-        class="opacity-0 absolute -top-1 -left-1 h-6 w-6 cursor-pointer"
+        class="opacity-0 absolute -top-1 -left-1 h-8 w-8 md:h-6 md:w-6 cursor-pointer"
         type="checkbox"
         :id="todo.id"
         v-model="checked"
       />
     </div>
-    <!-- TODO: make todos editable! -->
-    <div>
+    <p
+      contenteditable="true"
+      class="text-lg md:text-base outline-none"
+      @blur="handleUpdate"
+    >
       <span :class="this.checked ? 'line-through text-gray-300' : ''">
         {{ todo.content }}
       </span>
@@ -67,6 +75,6 @@ export default {
       >
         ⬆️
       </button>
-    </div>
+    </p>
   </li>
 </template>

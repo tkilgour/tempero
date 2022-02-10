@@ -18,7 +18,7 @@ export default {
 
 <template>
   <div class="max-w-xl mx-auto px-4 mt-8">
-    <ul class="ml-8">
+    <ul class="ml-11 md:ml-8">
       <TodoItem v-for="todo in todayTodos" :key="todo.id" :todo="todo" />
     </ul>
     <TodoInput />

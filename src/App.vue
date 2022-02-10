@@ -21,7 +21,13 @@ export default {
 
 <template>
   <main>
-    <h1 class="text-3xl text-center mt-4">Todo Today</h1>
+    <h1 class="text-4xl text-center mt-4">ToDo ToDay</h1>
     <TodoList />
   </main>
 </template>
+
+<style>
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+</style>
