@@ -1,24 +1,19 @@
 # Todo Today
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple To Do app that acts as a daily list. Add and check off today's items – tomorrow they disappear! Ok... well, they go into the _Archive_ for a day so you can re-add them easily to the next day's list. 
 
-## Recommended IDE Setup
+## In Progress
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+- [ ] Remove archived todos
+- [ ] Refresh app when the clock strikes midnight (or thereabouts). If the app is left open, Todos should be archived when user comes back the next day.
+- [ ] Keyboard control:
+  - [ ] capture typing a todo immediately
+  - [ ] navigate, edit, and check items off quickly by keyboard
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Setup
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
@@ -26,10 +21,4 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
