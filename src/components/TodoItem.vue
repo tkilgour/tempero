@@ -1,4 +1,3 @@
-
 <template>
   <li class="flex mb-4 md:mb-3 relative">
     <div
@@ -14,27 +13,28 @@
     </div>
     <p
       contenteditable="true"
-      class="text-lg md:text-base outline-none"
+      class="todo-content text-lg md:text-base outline-none"
+      :class="this.checked ? 'checked' : ''"
       @blur="handleUpdate"
     >
-      <span :class="this.checked ? 'line-through text-gray-300' : ''">
+      <span class="todo-content__inner" ref="todo-content">
         {{ todo.content }}
       </span>
-      <button
-        v-if="this.checked"
-        class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
-        @click="deleteTodo(todo.id)"
-      >
-        x
-      </button>
-      <button
-        v-if="this.archived"
-        class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
-        @click="refreshArchivedTodo(todo.id)"
-      >
-        ⬆️
-      </button>
     </p>
+    <!-- <button
+      v-if="this.checked"
+      class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
+      @click="deleteTodo(todo.id)"
+    >
+      x
+    </button>
+    <button
+      v-if="this.archived"
+      class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
+      @click="refreshArchivedTodo(todo.id)"
+    >
+      ⬆️
+    </button> -->
   </li>
 </template>
 
@@ -77,5 +77,34 @@ export default {
       this.updateTodo(this.todo.id, e.target.innerText);
     },
   },
+
+  mounted() {
+    this.$refs["todo-content"].style.setProperty(
+      "--todo-item-length",
+      this.todo.content.length
+    );
+  },
 };
 </script>
+
+<style scoped lang="scss">
+.todo-content {
+  opacity: 1;
+  transition: opacity calc(350ms) ease;
+
+  &__inner {
+    --todo-item-length: 0;
+    background-image: linear-gradient(transparent calc(100% - 2px), black 10px);
+    background-repeat: no-repeat;
+    background-size: 0% 65%;
+    transition: background-size calc(140ms + (0.7ms * var(--todo-item-length)));
+  }
+}
+.todo-content.checked {
+  opacity: 0.2;
+
+  .todo-content__inner {
+    background-size: 100% 65%;
+  }
+}
+</style>
