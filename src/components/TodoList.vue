@@ -1,21 +1,3 @@
-<script>
-import { mapState } from "pinia";
-import { useTodosStore } from "../stores/todos";
-import TodoItem from "./TodoItem.vue";
-import TodoInput from "./TodoInput.vue";
-
-export default {
-  components: {
-    TodoItem,
-    TodoInput,
-  },
-
-  computed: {
-    ...mapState(useTodosStore, ["todayTodos", "archivedTodos"]),
-  },
-};
-</script>
-
 <template>
   <div class="max-w-xl mx-auto px-4 mt-8">
     <ul class="ml-11 md:ml-8">
@@ -39,3 +21,21 @@ export default {
     </ul>
   </div>
 </template>
+
+<script>
+import { mapState } from "pinia";
+import { useTodosStore } from "../stores/todos";
+import TodoItem from "./TodoItem.vue";
+import TodoInput from "./TodoInput.vue";
+
+export default {
+  components: {
+    TodoItem,
+    TodoInput,
+  },
+
+  computed: {
+    ...mapState(useTodosStore, ["todayTodos", "archivedTodos"]),
+  },
+};
+</script>

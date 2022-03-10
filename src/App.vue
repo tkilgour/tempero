@@ -1,3 +1,10 @@
+<template>
+  <main>
+    <h1 class="text-4xl text-center mt-4">ToDo Today</h1>
+    <TodoList />
+  </main>
+</template>
+
 <script>
 import { mapActions } from "pinia";
 import { useTodosStore } from "./stores/todos";
@@ -18,13 +25,6 @@ export default {
   },
 };
 </script>
-
-<template>
-  <main>
-    <h1 class="text-4xl text-center mt-4">ToDo Today</h1>
-    <TodoList />
-  </main>
-</template>
 
 <style>
 * {
