@@ -1,6 +1,7 @@
 <template>
   <li class="flex mb-4 md:mb-3 relative">
     <div
+      v-if="!archived"
       class="absolute -left-10 md:-left-8 top-0 md:top-1 h-6 w-6 md:h-4 md:w-4 ring-offset-2 ring-1 ring-gray-300 rounded-full cursor-pointer"
       :class="{ 'bg-gray-300': checked }"
     >
@@ -11,10 +12,17 @@
         v-model="checked"
       />
     </div>
+    <button
+      v-else
+      class="text-2xl leading-none absolute -left-10 md:-left-8"
+      @click="refreshArchivedTodo(todo.id)"
+    >
+      +
+    </button>
     <p
-      contenteditable="true"
+      :contenteditable="!archived"
       class="todo-content text-lg md:text-base outline-none"
-      :class="this.checked ? 'checked' : ''"
+      :class="checked ? 'checked' : ''"
       @blur="handleUpdate"
     >
       <span class="todo-content__inner" ref="todo-content">
@@ -22,18 +30,11 @@
       </span>
     </p>
     <!-- <button
-      v-if="this.checked"
+      v-if="checked"
       class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
       @click="deleteTodo(todo.id)"
     >
       x
-    </button>
-    <button
-      v-if="this.archived"
-      class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
-      @click="refreshArchivedTodo(todo.id)"
-    >
-      ⬆️
     </button> -->
   </li>
 </template>

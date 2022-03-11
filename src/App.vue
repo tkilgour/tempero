@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="text-4xl text-center mt-4">ToDo Today</h1>
+    <h1 class="text-4xl text-center pt-4">Tempero</h1>
     <TodoList />
   </main>
 </template>
@@ -29,5 +29,12 @@ export default {
 <style>
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#app,
+main {
+  height: 100%;
 }
 </style>

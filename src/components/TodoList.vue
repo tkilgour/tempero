@@ -10,7 +10,7 @@
     >
       Archived
     </h2>
-    <ul>
+    <ul class="ml-11 md:ml-8">
       <TodoItem
         v-for="todo in archivedTodos"
         :key="todo.id"
