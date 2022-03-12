@@ -28,12 +28,11 @@
       :class="checked ? 'checked' : ''"
     >
       <span
-        :contenteditable="!archived"
+        :contenteditable="!archived && !checked"
         class="todo-content__inner"
         ref="todo-content"
         @blur="handleUpdate"
-        @keydown.enter.prevent="createEmptyTodo"
-        @keydown.delete="handleBackspace"
+        @keydown="handleKeydown"
       >
         {{ todo.content }}
       </span>
@@ -94,11 +93,21 @@ export default {
       }
     },
 
-    handleBackspace(e) {
-      const newTodoContent = e.target.innerText;
-
-      if (!newTodoContent) {
-        this.deleteTodo(this.todo.id);
+    handleKeydown(e) {
+      e.stopPropagation();
+      switch (e.key) {
+        case "Enter":
+          e.preventDefault();
+          this.createEmptyTodo();
+          break;
+        case "Backspace":
+          if (!e.target.innerText) {
+            this.deleteTodo(this.todo.id);
+          }
+          break;
+        case "Escape":
+          this.$refs["todo-content"].blur();
+          break;
       }
     },
   },
