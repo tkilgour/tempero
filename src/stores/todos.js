@@ -23,12 +23,10 @@ export const useTodosStore = defineStore({
       state.todos.filter((todo) => todo.dateArchived && !todo.completed),
   },
   actions: {
-    createTodo(content) {
-      const sanitizedContent = content.replace(/^- *(\[.*] ?)?/, "");
-
+    createEmptyTodo() {
       this.todos.push({
         id: Date.now(),
-        content: sanitizedContent,
+        content: "",
         completed: false,
         dateCreated: new Date(),
         dateArchived: null,
@@ -41,20 +39,26 @@ export const useTodosStore = defineStore({
     },
 
     updateTodo(id, content) {
+      // remove task item syntax that might be copied
+      const sanitizedContent = content.replace(/^- *(\[.*] ?)?/, "");
+
       const todo = this.todos.find((todo) => todo.id === id);
-      todo.content = content;
+      todo.content = sanitizedContent;
     },
 
     deleteTodo(id) {
-      const todoIndex = this.todos.findIndex((todo) => todo.id === id);
-      this.todos.splice(todoIndex, 1);
+      this.todos = this.todos.filter((todo) => todo.id !== id);
     },
 
     archiveTodos() {
-      this.todos.forEach((todo) => {
-        if (!isToday(todo.dateCreated)) todo.dateArchived = new Date();
+      this.todos = this.todos.filter((todo) => {
+        return !todo.dateArchived || isToday(todo.dateArchived);
+      });
 
-        // TODO: remove archived todos if date is not today
+      this.todos.forEach((todo) => {
+        if (!isToday(todo.dateCreated) && !todo.dateArchived) {
+          todo.dateArchived = new Date();
+        }
       });
     },
 

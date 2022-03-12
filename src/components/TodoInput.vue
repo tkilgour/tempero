@@ -31,7 +31,8 @@ export default {
 
     handleSubmit() {
       if (!this.content) return;
-      this.createTodo(this.content);
+      // deprecated
+      // this.createTodo(this.content);
       this.content = "";
     },
   },
