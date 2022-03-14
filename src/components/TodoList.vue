@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-xl mx-auto my-8 px-4">
     <ul class="ml-11 md:ml-8">
-      <TodoItem v-for="todo in todayTodos" :key="todo.id" :todo="todo" />
+      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
     </ul>
     <button
       class="mt-6 px-4 py-1 rounded-full bg-blue-100 text-gray-700"
@@ -45,7 +45,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodosStore, ["todayTodos", "archivedTodos"]),
+    ...mapState(useTodosStore, ["todos", "archivedTodos"]),
   },
 };
 </script>
