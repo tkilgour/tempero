@@ -2,7 +2,7 @@
   <div class="max-w-xl mx-auto my-8 px-4">
     <ul class="ml-11 md:ml-8">
       <draggable
-        v-model="todayTodos"
+        v-model="todos"
         @start="drag = true"
         @end="drag = false"
         item-key="id"
@@ -59,7 +59,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodosStore, ["todayTodos", "archivedTodos"]),
+    ...mapState(useTodosStore, ["todos", "archivedTodos"]),
   },
 };
 </script>
