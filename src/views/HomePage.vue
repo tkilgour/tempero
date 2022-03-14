@@ -23,6 +23,9 @@ export default {
     // setup global keyboard shortcuts
     this._keyListener = function (e) {
       if (e.key.length === 1 && e.key.match(/^[0-9a-zA-Z]+$/)) {
+        // prevent trigger on keyboard shortcuts (especially Cmd+R)
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+
         this.createEmptyTodo();
       }
     };
