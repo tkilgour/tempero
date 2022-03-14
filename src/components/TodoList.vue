@@ -6,6 +6,8 @@
         @start="drag = true"
         @end="drag = false"
         item-key="id"
+        :animation="100"
+        handle=".drag-handle"
       >
         <template #item="{ element }">
           <TodoItem :todo="element" />
