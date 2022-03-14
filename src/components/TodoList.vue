@@ -2,7 +2,7 @@
   <div class="max-w-xl mx-auto my-8 px-4">
     <ul class="ml-11 md:ml-8">
       <draggable
-        v-model="todos"
+        v-model="mutatableTodos"
         @start="drag = true"
         @end="drag = false"
         item-key="id"
@@ -55,11 +55,20 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTodosStore, ["createEmptyTodo"]),
+    ...mapActions(useTodosStore, ["createEmptyTodo", "updateTodosArray"]),
   },
 
   computed: {
     ...mapState(useTodosStore, ["todos", "archivedTodos"]),
+
+    mutatableTodos: {
+      get() {
+        return this.todos;
+      },
+      set(todos) {
+        this.updateTodosArray(todos);
+      },
+    },
   },
 };
 </script>

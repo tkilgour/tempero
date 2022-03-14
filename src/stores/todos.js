@@ -41,6 +41,10 @@ export const useTodosStore = defineStore({
       todo.content = sanitizedContent;
     },
 
+    updateTodosArray(todos) {
+      this.todos = todos;
+    },
+
     deleteTodo(id) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
     },
