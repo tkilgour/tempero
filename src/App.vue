@@ -42,6 +42,6 @@ html,
 body,
 #app,
 main {
-  height: 100%;
+  min-height: 100%;
 }
 </style>
