@@ -60,8 +60,8 @@ export const useTodosStore = defineStore({
       const currentTodos = [];
 
       this.todos.forEach((todo) => {
-        // ignore completed todos
-        if (todo.completed) return;
+        // ignore completed todos from before today
+        if (todo.completed && !isToday(todo.dateCreated)) return;
 
         if (!isToday(todo.dateCreated)) {
           // archive incomplete todos that were created before today
