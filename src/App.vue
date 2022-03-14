@@ -44,4 +44,9 @@ body,
 main {
   min-height: 100%;
 }
+
+:root {
+  --highlight-color: rgb(209 213 219);
+  --highlight-color-focus: rgb(77, 98, 131);
+}
 </style>

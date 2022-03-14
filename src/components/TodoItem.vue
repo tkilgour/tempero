@@ -1,13 +1,9 @@
 <template>
-  <li class="flex mb-4 md:mb-3 relative">
+  <li class="todo-item">
     <!-- If today, show checkbox -->
-    <div
-      v-if="!archived"
-      class="absolute -left-10 md:-left-8 top-0 md:top-1 h-6 w-6 md:h-4 md:w-4 ring-offset-2 ring-1 ring-gray-300 rounded-full cursor-pointer"
-      :class="{ 'bg-gray-300': checked }"
-    >
+    <div v-if="!archived" class="checkbox__custom" :class="{ checked }">
       <input
-        class="opacity-0 absolute -top-1 -left-1 h-8 w-8 md:h-6 md:w-6 cursor-pointer"
+        class="checkbox__native"
         type="checkbox"
         :id="todo.id"
         v-model="checked"
@@ -42,7 +38,7 @@
         class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
         @click="deleteTodo(todo.id)"
       >
-        &#128465;
+        🗑
       </button>
       <div class="drag-handle text-2xl cursor-grab">&#65309;</div>
     </div>
@@ -129,25 +125,81 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.todo-content {
-  min-height: 1.5em;
-  opacity: 1;
-  transition: opacity calc(350ms) ease;
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
 
-  &__inner {
-    --todo-item-length: 0;
-    background-image: linear-gradient(transparent calc(100% - 2px), black 10px);
-    background-repeat: no-repeat;
-    background-size: 0% 65%;
-    transition: background-size calc(140ms + (0.7ms * var(--todo-item-length)));
-    outline: none;
+  @media (min-width: 768px) {
+    margin-bottom: 0.75rem;
   }
-}
-.todo-content.checked {
-  opacity: 0.2;
 
-  .todo-content__inner {
-    background-size: 100% 65%;
+  .checkbox {
+    &__custom {
+      height: 1.5rem;
+      width: 1.5rem;
+      cursor: pointer;
+      box-shadow: rgb(255, 255, 255) 0 0 0 2px, var(--highlight-color) 0 0 0 3px,
+        rgba(0, 0, 0, 0) 0 0 0 0;
+      border-radius: 50%;
+
+      @media (min-width: 768px) {
+        height: 1rem;
+        width: 1rem;
+      }
+
+      &:focus-within {
+        --highlight-color: var(--highlight-color-focus);
+      }
+
+      &.checked {
+        background-color: var(--highlight-color);
+      }
+    }
+
+    &__native {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: -0.25rem;
+      height: 2rem;
+      width: 2rem;
+      cursor: pointer;
+
+      @media (min-width: 768px) {
+        top: 0.25rem;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+  }
+
+  .todo-content {
+    min-height: 1.5em;
+    opacity: 1;
+    transition: opacity calc(350ms) ease;
+
+    &__inner {
+      --todo-item-length: 0;
+      background-image: linear-gradient(
+        transparent calc(100% - 2px),
+        black 10px
+      );
+      background-repeat: no-repeat;
+      background-size: 0% 65%;
+      transition: background-size
+        calc(140ms + (0.7ms * var(--todo-item-length)));
+      outline: none;
+    }
+  }
+  .todo-content.checked {
+    opacity: 0.2;
+
+    .todo-content__inner {
+      background-size: 100% 65%;
+    }
   }
 }
 </style>

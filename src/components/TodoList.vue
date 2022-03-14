@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-xl mx-auto my-8 px-4">
-    <ul class="ml-11 md:ml-8">
+    <ul>
       <draggable
         v-model="mutatableTodos"
         @start="drag = true"
@@ -26,7 +26,7 @@
     >
       Archived
     </h2>
-    <ul class="ml-11 md:ml-8">
+    <ul>
       <TodoItem
         v-for="todo in archivedTodos"
         :key="todo.id"
