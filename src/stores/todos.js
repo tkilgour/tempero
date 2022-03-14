@@ -50,8 +50,6 @@ export const useTodosStore = defineStore({
     },
 
     archiveTodos() {
-      // TODO: test and debug this code block –– waaaay too tired to be writing this code
-
       // purge archived todos from more than one day ago
       this.archivedTodos = this.archivedTodos.filter((todo) => {
         return isToday(todo.dateArchived);
