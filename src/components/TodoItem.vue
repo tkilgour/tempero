@@ -37,13 +37,15 @@
         {{ todo.content }}
       </span>
     </p>
-    <!-- <button
-      v-if="checked"
-      class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
-      @click="deleteTodo(todo.id)"
-    >
-      x
-    </button> -->
+    <div v-if="!archived" class="flex items-center">
+      <button
+        class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
+        @click="deleteTodo(todo.id)"
+      >
+        &#128465;
+      </button>
+      <div class="drag-handle text-2xl cursor-grab">&#65309;</div>
+    </div>
   </li>
 </template>
 
