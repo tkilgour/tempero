@@ -21,8 +21,14 @@
 export default {};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .delete-button {
   padding: 0.25rem 0.5rem;
+  transform: scale(1);
+  transition: transform 200ms ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 </style>

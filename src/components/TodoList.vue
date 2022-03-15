@@ -1,20 +1,17 @@
 <template>
   <div class="todo-list">
-    <ul>
-      <draggable
-        v-model="mutatableTodos"
-        @start="drag = true"
-        @end="drag = false"
-        item-key="id"
-        :animation="100"
-        handle=".drag-handle"
-        tag="transition-group"
-      >
-        <template #item="{ element }">
-          <TodoItem :todo="element" />
-        </template>
-      </draggable>
-    </ul>
+    <draggable
+      v-model="mutatableTodos"
+      item-key="id"
+      :animation="100"
+      handle=".drag-handle"
+      tag="transition-group"
+      :component-data="{ tag: 'ul', name: 'todo-list', type: 'transition' }"
+    >
+      <template #item="{ element }">
+        <TodoItem :todo="element" :key="element.id" />
+      </template>
+    </draggable>
     <button class="new-todo-btn" @click="createEmptyTodo">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -55,12 +52,6 @@ export default {
     draggable,
   },
 
-  data() {
-    return {
-      drag: false,
-    };
-  },
-
   methods: {
     ...mapActions(useTodosStore, ["createEmptyTodo", "updateTodosArray"]),
   },
@@ -82,7 +73,6 @@ export default {
 
 <style lang="scss" scoped>
 .h2 {
-  /*  mt-8 text-xl text-center text-gray-400 */
   margin-top: 2rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -91,7 +81,6 @@ export default {
 }
 
 .todo-list {
-  /* max-w-xl mx-auto my-8 px-4 */
   max-width: 36rem;
   margin: 2rem auto;
   padding-inline: 1rem;
@@ -110,5 +99,39 @@ export default {
   border-radius: 50%;
   background-color: var(--primary-color);
   color: #fff;
+  transform: scale(1);
+  opacity: 0.7;
+  transition: all 200ms ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.todo-list-leave {
+  opacity: 1;
+}
+
+.todo-list-leave-active {
+  --timing: 300ms;
+  animation: pop-out var(--timing) ease-out;
+  transition: opacity var(--timing);
+  opacity: 0;
+}
+
+@keyframes pop-out {
+  from {
+    transform: scale(1);
+  }
+
+  33% {
+    transform: scale(1.02);
+  }
+
+  to {
+    transform: scale(0.92);
+  }
 }
 </style>

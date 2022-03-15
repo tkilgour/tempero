@@ -1,5 +1,5 @@
 <template>
-  <li class="todo-item">
+  <li class="todo-item" :class="{ editing }">
     <!-- If today, show checkbox -->
     <div
       v-if="!archived"
@@ -37,9 +37,11 @@
     <p class="todo-content" :class="checked ? 'checked' : ''">
       <span
         :contenteditable="!archived && !checked"
+        :tabindex="!archived && !checked"
         class="todo-content__inner"
         ref="todo-content"
-        @blur="handleUpdate"
+        @focus="handleFocus"
+        @blur="handleBlur"
         @keydown="handleKeydown"
       >
         {{ todo.content }}
@@ -88,6 +90,12 @@ export default {
     DeleteButton,
   },
 
+  data() {
+    return {
+      editing: false,
+    };
+  },
+
   computed: {
     checked: {
       get() {
@@ -108,7 +116,12 @@ export default {
       "refreshArchivedTodo",
     ]),
 
-    handleUpdate(e) {
+    handleFocus() {
+      this.editing = true;
+    },
+
+    handleBlur(e) {
+      this.editing = false;
       const newTodoContent = e.target.innerText;
 
       if (!newTodoContent) {
@@ -161,6 +174,12 @@ export default {
   gap: 1rem;
   margin-bottom: 1rem;
   position: relative;
+  transform: scale(1);
+  transition: transform 150ms ease-in-out;
+
+  &.editing {
+    transform: scale(1.03);
+  }
 
   @media (min-width: 768px) {
     margin-bottom: 0.75rem;
@@ -178,13 +197,15 @@ export default {
     box-shadow: rgb(255, 255, 255) 0 0 0 2px, var(--highlight-color) 0 0 0 3px,
       rgba(0, 0, 0, 0) 0 0 0 0;
     border-radius: 50%;
+    transition: box-shadow 200ms ease;
 
     @media (min-width: 768px) {
       height: 1rem;
       width: 1rem;
     }
 
-    &:focus-within {
+    &:focus-within,
+    &:hover {
       --highlight-color: var(--highlight-color-focus);
     }
 
