@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-list">
+  <main id="content" class="todo-list">
     <p class="no-content" v-if="!this.todos.length">Just start typing!</p>
     <draggable
       v-model="mutatableTodos"
@@ -15,7 +15,11 @@
         <TodoItem :todo="element" :key="element.id" />
       </template>
     </draggable>
-    <button class="new-todo-btn" @click="createEmptyTodo">
+    <button
+      class="new-todo-btn"
+      @click="createEmptyTodo"
+      title="Create New Todo"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-6 w-6"
@@ -40,7 +44,7 @@
         archived
       />
     </ul>
-  </div>
+  </main>
 </template>
 
 <script>

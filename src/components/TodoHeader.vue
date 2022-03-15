@@ -5,6 +5,7 @@
       class="settings-btn"
       :class="{ rotate: showSettings }"
       title="Toggle Settings"
+      :aria-expanded="showSettings"
       @click="toggleSettings"
     >
       <svg
@@ -128,7 +129,7 @@ export default {
   &:hover,
   &:focus {
     color: var(--primary-color);
-    outline: none;
+    outline: dotted;
   }
 }
 

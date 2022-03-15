@@ -1,5 +1,5 @@
 <template>
-  <button class="delete-button" title="Delete">
+  <button class="delete-button" :title="`Delete ${content}`">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-6 w-6"
@@ -18,7 +18,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    content: {
+      type: String,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

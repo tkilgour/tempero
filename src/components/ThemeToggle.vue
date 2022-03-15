@@ -1,5 +1,9 @@
 <template>
-  <button class="theme-toggle" aria-label="toggle theme" @click="toggleTheme">
+  <button
+    class="theme-toggle"
+    :aria-label="`Switch to ${this.theme === 'light' ? 'dark' : 'light'} theme`"
+    @click="toggleTheme"
+  >
     <Transition name="sunset">
       <svg
         v-if="theme === 'dark'"

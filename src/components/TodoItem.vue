@@ -34,7 +34,12 @@
       </svg>
     </button>
 
-    <label class="todo-content" :class="{ checked }">
+    <label
+      :for="todo.id"
+      :aria-label="todo.content"
+      class="todo-content"
+      :class="{ checked }"
+    >
       <span
         :contenteditable="!archived && !checked"
         :tabindex="!archived && !checked"
@@ -53,7 +58,7 @@
       :class="{ hide: !showSettings }"
       @click="resetSettingsTimeout"
     >
-      <DeleteButton @click="deleteTodo(todo.id)" />
+      <DeleteButton :content="todo.content" @click="deleteTodo(todo.id)" />
       <div class="drag-handle" :class="{ hide: !showSettings }">
         <svg
           xmlns="http://www.w3.org/2000/svg"

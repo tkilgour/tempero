@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <a href="#content" class="skip-link">Skip to Content</a>
     <TodoHeader />
     <TodoList />
   </div>
@@ -48,5 +49,18 @@ export default {
   max-width: 36rem;
   margin-inline: auto;
   padding-inline: 1rem;
+}
+
+.skip-link {
+  position: fixed;
+  top: -200px;
+  left: 4rem;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  padding: 0.5rem 1rem;
+
+  &:focus {
+    top: 0;
+  }
 }
 </style>
