@@ -1,32 +1,40 @@
 <template>
-  <li class="flex mb-4 md:mb-3 relative">
+  <li class="todo-item">
     <!-- If today, show checkbox -->
     <div
       v-if="!archived"
-      class="absolute -left-10 md:-left-8 top-0 md:top-1 h-6 w-6 md:h-4 md:w-4 ring-offset-2 ring-1 ring-gray-300 rounded-full cursor-pointer"
-      :class="{ 'bg-gray-300': checked }"
+      class="checkbox__custom"
+      :class="{ checked }"
+      @click="handleCheckboxClick"
     >
       <input
-        class="opacity-0 absolute -top-1 -left-1 h-8 w-8 md:h-6 md:w-6 cursor-pointer"
+        class="checkbox__native"
         type="checkbox"
         :id="todo.id"
         v-model="checked"
+        ref="checkbox"
       />
     </div>
 
     <!-- Else it's archived, so show add to today's list button -->
-    <button
-      v-else
-      class="text-2xl leading-none absolute -left-10 md:-left-8"
-      @click="refreshArchivedTodo(todo.id)"
-    >
-      +
+    <button v-else class="refresh-btn" @click="refreshArchivedTodo(todo.id)">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
     </button>
 
-    <p
-      class="todo-content grow text-lg md:text-base outline-none"
-      :class="checked ? 'checked' : ''"
-    >
+    <p class="todo-content" :class="checked ? 'checked' : ''">
       <span
         :contenteditable="!archived && !checked"
         class="todo-content__inner"
@@ -37,14 +45,24 @@
         {{ todo.content }}
       </span>
     </p>
-    <div v-if="!archived" class="flex items-center">
-      <button
-        class="ml-4 px-2 py-1 text-lg leading-4 no-underline text-black"
-        @click="deleteTodo(todo.id)"
-      >
-        &#128465;
-      </button>
-      <div class="drag-handle text-2xl cursor-grab">&#65309;</div>
+    <div v-if="!archived" class="edit-wpr">
+      <DeleteButton @click="deleteTodo(todo.id)" />
+      <div class="drag-handle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 8h16M4 16h16"
+          />
+        </svg>
+      </div>
     </div>
   </li>
 </template>
@@ -52,6 +70,7 @@
 <script>
 import { mapActions } from "pinia";
 import { useTodosStore } from "../stores/todos";
+import DeleteButton from "@/components/DeleteButton.vue";
 
 export default {
   props: {
@@ -63,6 +82,10 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+
+  components: {
+    DeleteButton,
   },
 
   computed: {
@@ -112,6 +135,10 @@ export default {
           break;
       }
     },
+
+    handleCheckboxClick() {
+      this.$refs.checkbox.blur();
+    },
   },
 
   mounted() {
@@ -129,10 +156,78 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.todo-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.checkbox {
+  &__custom {
+    position: relative;
+    margin-top: 0.25em;
+    flex-shrink: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+    box-shadow: rgb(255, 255, 255) 0 0 0 2px, var(--highlight-color) 0 0 0 3px,
+      rgba(0, 0, 0, 0) 0 0 0 0;
+    border-radius: 50%;
+
+    @media (min-width: 768px) {
+      height: 1rem;
+      width: 1rem;
+    }
+
+    &:focus-within {
+      --highlight-color: var(--highlight-color-focus);
+    }
+
+    &.checked {
+      background-color: var(--highlight-color);
+    }
+  }
+
+  &__native {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: -0.25rem;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+
+    @media (min-width: 768px) {
+      top: -0.25rem;
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+}
+
+.refresh-btn {
+  font-size: 1.5rem;
+  line-height: 1;
+  align-self: start;
+}
+
 .todo-content {
+  flex-grow: 1;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   min-height: 1.5em;
   opacity: 1;
   transition: opacity calc(350ms) ease;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 
   &__inner {
     --todo-item-length: 0;
@@ -143,11 +238,21 @@ export default {
     outline: none;
   }
 }
+
 .todo-content.checked {
   opacity: 0.2;
 
   .todo-content__inner {
     background-size: 100% 65%;
+  }
+}
+
+.edit-wpr {
+  display: flex;
+  align-items: center;
+
+  .drag-handle {
+    cursor: grab;
   }
 }
 </style>

@@ -38,10 +38,14 @@ const logout = async () => {
   -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body,
-#app,
-main {
-  min-height: 100%;
+#app {
+  height: 100%;
+}
+
+:root {
+  --primary-color: rgb(123, 166, 231);
+  --low-priority-color: rgb(156, 163, 175);
+  --highlight-color: rgb(209, 213, 219);
+  --highlight-color-focus: rgb(77, 98, 131);
 }
 </style>
