@@ -1,6 +1,9 @@
 <template>
   <main id="content" class="todo-list">
-    <p class="no-content" v-if="!this.todos.length">Just start typing!</p>
+    <p class="no-content" v-if="!this.todos.length">
+      Tap the + button<span class="no-mobile">, or just start typing</span> to
+      get started!
+    </p>
     <draggable
       v-model="mutatableTodos"
       item-key="id"
@@ -96,6 +99,10 @@ export default {
   right: 0;
 }
 
+.no-mobile {
+  display: none;
+}
+
 .h2 {
   margin-top: 2rem;
   font-size: 1.25rem;
@@ -154,6 +161,10 @@ export default {
 @media (min-width: 768px) {
   .todo-list {
     margin-top: 1rem;
+  }
+
+  .no-mobile {
+    display: inline;
   }
 }
 </style>

@@ -129,7 +129,7 @@ export default {
   &:hover,
   &:focus {
     color: var(--primary-color);
-    outline: dotted;
+    outline: none;
   }
 }
 
