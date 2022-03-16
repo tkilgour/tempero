@@ -47,31 +47,30 @@
         {{ todo.content }}
       </span>
     </p>
-    <Transition name="slide-fade">
-      <div
-        v-if="!archived && showSettings"
-        class="edit-wpr"
-        @click="resetSettingsTimeout"
-      >
-        <DeleteButton @click="deleteTodo(todo.id)" />
-        <div class="drag-handle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4 8h16M4 16h16"
-            />
-          </svg>
-        </div>
+    <div
+      v-if="!archived"
+      class="edit-wpr"
+      :class="{ hidden: !showSettings }"
+      @click="resetSettingsTimeout"
+    >
+      <DeleteButton @click="deleteTodo(todo.id)" />
+      <div class="drag-handle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 8h16M4 16h16"
+          />
+        </svg>
       </div>
-    </Transition>
+    </div>
   </li>
 </template>
 
@@ -266,23 +265,18 @@ export default {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 200ms ease, opacity 200ms ease;
 
   .drag-handle {
     cursor: grab;
   }
-}
 
-.slide-fade-enter-active {
-  transition: all 200ms ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 200ms ease-out;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
+  &.hidden:not(:focus-within) {
+    pointer-events: none;
+    transform: translateX(-0.5rem);
+    opacity: 0;
+  }
 }
 </style>
