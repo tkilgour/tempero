@@ -1,9 +1,11 @@
 <template>
   <main>
     <h1 class="h1">Tempero</h1>
+    <ThemeToggle />
     <button
       class="settings-btn"
       :class="{ rotate: showSettings }"
+      title="Toggle Settings"
       @click="toggleSettings"
     >
       <svg
@@ -30,10 +32,12 @@ import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "@/stores/todos";
 import { useUiStore } from "@/stores/ui";
 import TodoList from "@/components/TodoList.vue";
+import ThemeToggle from "../components/ThemeToggle.vue";
 
 export default {
   components: {
     TodoList,
+    ThemeToggle,
   },
 
   methods: {

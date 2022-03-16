@@ -101,7 +101,7 @@ export default {
   line-height: 1;
   border-radius: 50%;
   background-color: var(--primary-color-light);
-  color: #fff;
+  color: var(--bg-color);
   transform: scale(1);
   transition: all 200ms ease;
 
