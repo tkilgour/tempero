@@ -68,4 +68,11 @@ body,
     color-scheme: dark;
   }
 }
+
+@media screen and (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
 </style>

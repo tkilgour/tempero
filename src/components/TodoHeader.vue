@@ -190,7 +190,6 @@ export default {
   }
 
   .settings-wpr {
-    min-height: 2rem;
     grid-area: 2 / 1 / 2 / 4;
 
     & > * {
