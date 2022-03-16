@@ -38,15 +38,30 @@ const logout = async () => {
   -webkit-tap-highlight-color: transparent;
 }
 
+html,
+body,
 #app {
   height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 :root {
+  --bg-color: hsl(0, 0%, 100%);
+  --text-color: hsl(0, 0%, 9%);
   --primary-color: hsl(216, 69%, 69%);
   --primary-color-light: hsl(216, 69%, 80%);
   --low-priority-color: hsl(218, 11%, 65%);
   --highlight-color: hsl(216, 12%, 84%);
   --highlight-color-focus: hsl(217, 26%, 41%);
+
+  /* Dark Mode */
+  /* --bg-color: hsl(208, 100%, 12%);
+  --text-color: hsl(0, 0%, 72%);
+  --primary-color: hsl(215, 19%, 45%);
+  --primary-color-light: hsl(215, 19%, 35%);
+  --low-priority-color: hsl(218, 11%, 65%);
+  --highlight-color: hsl(216, 75%, 29%);
+  --highlight-color-focus: hsl(217, 26%, 41%); */
 }
 </style>
