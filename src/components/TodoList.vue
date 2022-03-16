@@ -110,7 +110,7 @@ export default {
 }
 
 .todo-list-enter-active {
-  animation: pop-out 200ms ease-out reverse;
+  animation: pop-out 170ms ease-out reverse;
 }
 
 .todo-list-leave-active {
@@ -128,7 +128,7 @@ export default {
   }
 
   to {
-    transform: scale(0.92);
+    transform: scale(0.9);
     opacity: 0;
   }
 }
