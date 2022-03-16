@@ -34,7 +34,7 @@
       </svg>
     </button>
 
-    <p class="todo-content" :class="{ checked }">
+    <label class="todo-content" :class="{ checked }">
       <span
         :contenteditable="!archived && !checked"
         :tabindex="!archived && !checked"
@@ -46,7 +46,7 @@
       >
         {{ todo.content }}
       </span>
-    </p>
+    </label>
     <div
       v-if="!archived"
       class="edit-wpr"

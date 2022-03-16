@@ -1,5 +1,6 @@
 <template>
   <div class="todo-list">
+    <p class="no-content" v-if="!this.todos.length">Just start typing!</p>
     <draggable
       v-model="mutatableTodos"
       item-key="id"
@@ -80,6 +81,15 @@ export default {
   margin-top: 2rem;
   padding-bottom: 3rem;
   grid-column-start: span 3;
+}
+
+.no-content {
+  text-align: center;
+  font-style: italic;
+  color: var(--highlight-color);
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .h2 {
