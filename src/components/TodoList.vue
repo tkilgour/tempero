@@ -76,17 +76,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.todo-list {
+  margin-top: 2rem;
+  padding-bottom: 3rem;
+  grid-column-start: span 3;
+}
+
 .h2 {
   margin-top: 2rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
   text-align: center;
   color: var(--low-priority-color);
-}
-
-.todo-list {
-  margin-block: 2rem;
-  grid-column-start: span 3;
 }
 
 .new-todo-btn {
@@ -133,6 +134,12 @@ export default {
   to {
     transform: scale(0.9);
     opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .todo-list {
+    margin-top: 1rem;
   }
 }
 </style>

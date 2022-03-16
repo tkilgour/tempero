@@ -176,58 +176,39 @@ export default {
 .todo-item {
   display: flex;
   gap: 1rem;
-  /* align-items: center; */
   margin-bottom: 1rem;
   position: relative;
-
-  @media (min-width: 768px) {
-    margin-bottom: 0.75rem;
-  }
 }
 
-.checkbox {
-  &__custom {
-    position: relative;
-    margin-top: 0.25em;
-    flex-shrink: 0;
-    height: 1.5rem;
-    width: 1.5rem;
-    cursor: pointer;
-    box-shadow: rgb(255, 255, 255) 0 0 0 2px, var(--highlight-color) 0 0 0 3px,
-      rgba(0, 0, 0, 0) 0 0 0 0;
-    border-radius: 50%;
-    transition: box-shadow 200ms ease;
+.checkbox__custom {
+  position: relative;
+  margin-top: 0.25em;
+  flex-shrink: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  box-shadow: rgb(255, 255, 255) 0 0 0 2px, var(--highlight-color) 0 0 0 3px,
+    rgba(0, 0, 0, 0) 0 0 0 0;
+  border-radius: 50%;
+  transition: box-shadow 200ms ease;
 
-    @media (min-width: 768px) {
-      height: 1rem;
-      width: 1rem;
-    }
-
-    &:focus-within,
-    &:hover {
-      --highlight-color: var(--highlight-color-focus);
-    }
-
-    &.checked {
-      background-color: var(--highlight-color);
-    }
+  &:focus-within,
+  &:hover {
+    --highlight-color: var(--highlight-color-focus);
   }
 
-  &__native {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: -0.25rem;
-    height: 2rem;
-    width: 2rem;
-    cursor: pointer;
-
-    @media (min-width: 768px) {
-      top: -0.25rem;
-      height: 1.5rem;
-      width: 1.5rem;
-    }
+  &.checked {
+    background-color: var(--highlight-color);
   }
+}
+.checkbox__native {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: -0.25rem;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
 }
 
 .refresh-btn {
@@ -243,11 +224,6 @@ export default {
   min-height: 1.5em;
   opacity: 1;
   transition: opacity 350ms ease;
-
-  @media (min-width: 768px) {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
 
   &__inner {
     --todo-item-length: 0;
@@ -283,6 +259,24 @@ export default {
     pointer-events: none;
     transform: translateX(-0.5rem);
     opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .checkbox__custom {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .checkbox__native {
+    top: -0.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .todo-content {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 </style>

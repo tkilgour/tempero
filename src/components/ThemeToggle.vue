@@ -79,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 .theme-toggle {
   position: relative;
-  margin-top: 1.5rem;
+  padding-bottom: 4px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -89,7 +89,6 @@ export default {
 
   .icon {
     position: absolute;
-    bottom: 0;
   }
 }
 
