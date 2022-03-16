@@ -17,7 +17,12 @@
     </div>
 
     <!-- Else it's archived, so show add to today's list button -->
-    <button v-else class="refresh-btn" @click="refreshArchivedTodo(todo.id)">
+    <button
+      v-else
+      class="refresh-btn"
+      title="Add to Today's List"
+      @click="refreshArchivedTodo(todo.id)"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-6 w-6"
@@ -62,6 +67,7 @@
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
+          title="Drag to Re-order"
         >
           <path
             stroke-linecap="round"
