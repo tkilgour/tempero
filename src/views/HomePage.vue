@@ -1,13 +1,34 @@
 <template>
   <main>
     <h1 class="h1">Tempero</h1>
+    <button
+      class="settings-btn"
+      :class="{ rotate: showSettings }"
+      @click="toggleSettings"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+        />
+      </svg>
+    </button>
     <TodoList />
   </main>
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "@/stores/todos";
+import { useUiStore } from "@/stores/ui";
 import TodoList from "@/components/TodoList.vue";
 
 export default {
@@ -17,6 +38,11 @@ export default {
 
   methods: {
     ...mapActions(useTodosStore, ["archiveTodos", "createEmptyTodo"]),
+    ...mapActions(useUiStore, ["toggleSettings"]),
+  },
+
+  computed: {
+    ...mapState(useUiStore, ["showSettings"]),
   },
 
   mounted() {
@@ -42,9 +68,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+main {
+  max-width: 36rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .h1 {
   font-size: 2.75rem;
-  text-align: center;
-  margin-top: 1rem;
+  line-height: 1;
+  justify-self: center;
+  grid-column-start: 2;
+}
+
+.settings-btn {
+  place-self: center end;
+  transform: rotate(0);
+  transition: transform 150ms ease;
+
+  &.rotate {
+    transform: rotate(90deg);
+  }
 }
 </style>

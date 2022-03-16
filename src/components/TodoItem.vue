@@ -47,31 +47,38 @@
         {{ todo.content }}
       </span>
     </p>
-    <div v-if="!archived" class="edit-wpr">
-      <DeleteButton @click="deleteTodo(todo.id)" />
-      <div class="drag-handle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M4 8h16M4 16h16"
-          />
-        </svg>
+    <Transition name="slide-fade">
+      <div
+        v-if="!archived && showSettings"
+        class="edit-wpr"
+        @click="resetSettingsTimeout"
+      >
+        <DeleteButton @click="deleteTodo(todo.id)" />
+        <div class="drag-handle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 8h16M4 16h16"
+            />
+          </svg>
+        </div>
       </div>
-    </div>
+    </Transition>
   </li>
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "../stores/todos";
+import { useUiStore } from "../stores/ui";
 import DeleteButton from "@/components/DeleteButton.vue";
 
 export default {
@@ -91,6 +98,8 @@ export default {
   },
 
   computed: {
+    ...mapState(useUiStore, ["showSettings"]),
+
     checked: {
       get() {
         return this.todo.completed;
@@ -109,6 +118,7 @@ export default {
       "deleteTodo",
       "refreshArchivedTodo",
     ]),
+    ...mapActions(useUiStore, ["resetSettingsTimeout"]),
 
     handleBlur(e) {
       const newTodoContent = e.target.innerText;
@@ -161,6 +171,7 @@ export default {
 .todo-item {
   display: flex;
   gap: 1rem;
+  /* align-items: center; */
   margin-bottom: 1rem;
   position: relative;
 
@@ -253,10 +264,25 @@ export default {
 
 .edit-wpr {
   display: flex;
+  gap: 0.5rem;
   align-items: center;
 
   .drag-handle {
     cursor: grab;
   }
+}
+
+.slide-fade-enter-active {
+  transition: all 200ms ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 200ms ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>

@@ -7,6 +7,8 @@
       handle=".drag-handle"
       tag="transition-group"
       :component-data="{ tag: 'ul', name: 'todo-list', type: 'animation' }"
+      @start="clearSettingsTimeout"
+      @end="resetSettingsTimeout"
     >
       <template #item="{ element }">
         <TodoItem :todo="element" :key="element.id" />
@@ -43,6 +45,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "../stores/todos";
+import { useUiStore } from "../stores/ui";
 import TodoItem from "./TodoItem.vue";
 import draggable from "vuedraggable";
 
@@ -54,6 +57,7 @@ export default {
 
   methods: {
     ...mapActions(useTodosStore, ["createEmptyTodo", "updateTodosArray"]),
+    ...mapActions(useUiStore, ["clearSettingsTimeout", "resetSettingsTimeout"]),
   },
 
   computed: {
@@ -81,9 +85,8 @@ export default {
 }
 
 .todo-list {
-  max-width: 36rem;
-  margin: 2rem auto;
-  padding-inline: 1rem;
+  margin-block: 2rem;
+  grid-column-start: span 3;
 }
 
 .new-todo-btn {
