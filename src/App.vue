@@ -43,7 +43,7 @@ body,
 #app {
   height: 100%;
   background-color: var(--bg-color);
-  transition: color 700ms ease, background-color 700ms ease;
+  transition: background-color 500ms ease;
   color: var(--text-color);
 }
 
@@ -52,20 +52,18 @@ body,
     --bg-color: hsl(0, 0%, 100%);
     --text-color: hsl(0, 0%, 9%);
     --primary-color: hsl(209, 62%, 50%);
-    --primary-color-light: hsl(209, 62%, 60%);
+    --primary-color-light: hsl(209, 62%, 65%);
     --low-priority-color: hsl(218, 11%, 65%);
-    --highlight-color: hsl(216, 12%, 84%);
-    --highlight-color-focus: hsl(217, 26%, 41%);
+    --highlight-color: hsl(210, 2%, 66%);
   }
 
   &[data-theme="dark"] {
     --bg-color: hsl(218, 23%, 23%);
-    --text-color: hsl(0, 0%, 72%);
+    --text-color: hsl(0, 0%, 90%);
     --primary-color: hsl(0, 97%, 85%);
     --primary-color-light: hsl(0, 97%, 90%);
     --low-priority-color: hsl(218, 11%, 65%);
-    --highlight-color: hsl(216, 75%, 29%);
-    --highlight-color-focus: hsl(217, 26%, 41%);
+    --highlight-color: hsl(210, 2%, 76%);
 
     color-scheme: dark;
   }

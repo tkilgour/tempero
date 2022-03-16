@@ -96,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  margin-top: 1rem;
+  padding-top: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 3rem;
 }
@@ -162,7 +162,7 @@ export default {
 
 @media (min-width: 768px) {
   .header {
-    margin-top: 2rem;
+    padding-top: 2rem;
     grid-row-gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
   }

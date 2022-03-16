@@ -1,12 +1,7 @@
 <template>
   <li class="todo-item">
     <!-- If today, show checkbox -->
-    <div
-      v-if="!archived"
-      class="checkbox__custom"
-      :class="{ checked }"
-      @click="handleCheckboxClick"
-    >
+    <div v-if="!archived" class="checkbox__custom" :class="{ checked }">
       <input
         class="checkbox__native"
         type="checkbox"
@@ -152,10 +147,6 @@ export default {
           break;
       }
     },
-
-    handleCheckboxClick() {
-      this.$refs.checkbox.blur();
-    },
   },
 
   mounted() {
@@ -187,18 +178,20 @@ export default {
   height: 1.5rem;
   width: 1.5rem;
   cursor: pointer;
-  box-shadow: rgb(255, 255, 255) 0 0 0 2px, var(--highlight-color) 0 0 0 3px,
-    rgba(0, 0, 0, 0) 0 0 0 0;
+  --ring-width: 3px;
+  box-shadow: var(--bg-color) 0 0 0 2px,
+    var(--highlight-color) 0 0 0 var(--ring-width), rgba(0, 0, 0, 0) 0 0 0 0;
   border-radius: 50%;
   transition: box-shadow 200ms ease;
 
   &:focus-within,
   &:hover {
-    --highlight-color: var(--highlight-color-focus);
+    --highlight-color: var(--primary-color);
+    --ring-width: 4px;
   }
 
   &.checked {
-    background-color: var(--highlight-color);
+    background-color: var(--primary-color-light);
   }
 }
 .checkbox__native {
@@ -227,7 +220,10 @@ export default {
 
   &__inner {
     --todo-item-length: 0;
-    background-image: linear-gradient(transparent calc(100% - 2px), black 10px);
+    background-image: linear-gradient(
+      transparent calc(100% - 2px),
+      currentColor 10px
+    );
     background-repeat: no-repeat;
     background-size: 0% 65%;
     transition: background-size calc(140ms + (0.7ms * var(--todo-item-length)));
@@ -236,7 +232,7 @@ export default {
 }
 
 .todo-content.checked {
-  opacity: 0.2;
+  opacity: 0.4;
 
   .todo-content__inner {
     background-size: 100% 65%;
