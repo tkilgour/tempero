@@ -50,11 +50,11 @@
     <div
       v-if="!archived"
       class="edit-wpr"
-      :class="{ hidden: !showSettings }"
+      :class="{ hide: !showSettings }"
       @click="resetSettingsTimeout"
     >
       <DeleteButton @click="deleteTodo(todo.id)" />
-      <div class="drag-handle">
+      <div class="drag-handle" :class="{ hide: !showSettings }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6"
@@ -249,9 +249,15 @@ export default {
 
   .drag-handle {
     cursor: grab;
+    opacity: 1;
+    transition: opacity 200ms ease;
+
+    &.hide {
+      opacity: 0;
+    }
   }
 
-  &.hidden:not(:focus-within) {
+  &.hide:not(:focus-within) {
     pointer-events: none;
     transform: translateX(-0.5rem);
     opacity: 0;

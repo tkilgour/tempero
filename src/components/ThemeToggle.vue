@@ -90,6 +90,16 @@ export default {
   .icon {
     position: absolute;
   }
+
+  transform: translateY(0);
+  transition: transform 200ms ease;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    transform: translateY(-0.2rem);
+    color: var(--primary-color-light);
+  }
 }
 
 .sunset-enter-active,

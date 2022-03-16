@@ -26,8 +26,11 @@ export default {};
   transform: scale(1);
   transition: transform 200ms ease;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     transform: scale(1.2);
+    color: var(--primary-color-light);
   }
 }
 </style>

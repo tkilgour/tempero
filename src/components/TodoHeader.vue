@@ -124,6 +124,12 @@ export default {
   &.rotate {
     transform: rotate(90deg);
   }
+
+  &:hover,
+  &:focus {
+    color: var(--primary-color);
+    outline: none;
+  }
 }
 
 .settings-wpr {
@@ -146,6 +152,15 @@ export default {
     width: 3rem;
     display: grid;
     place-items: center;
+    transform: translateY(0);
+    transition: transform 200ms ease;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      transform: translateY(-0.2rem);
+      color: var(--primary-color-light);
+    }
   }
 }
 
