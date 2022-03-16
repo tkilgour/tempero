@@ -11,6 +11,11 @@ const isToday = (someDateStr) => {
   );
 };
 
+const sanitizeTodo = (todo) => {
+  // remove task item syntax that might be copied
+  return todo.replace(/^- *(\[.*] ?)?/, "");
+};
+
 export const useTodosStore = defineStore({
   id: "todos",
   state: () => ({
@@ -18,6 +23,16 @@ export const useTodosStore = defineStore({
     archivedTodos: useStorage("archivedTodos", []),
   }),
   actions: {
+    createTodo(content, completed = false) {
+      this.todos.push({
+        id: Date.now(),
+        content: sanitizeTodo(content),
+        completed: completed,
+        dateCreated: new Date(),
+        dateArchived: null,
+      });
+    },
+
     createEmptyTodo() {
       this.todos.push({
         id: Date.now(),
@@ -34,11 +49,8 @@ export const useTodosStore = defineStore({
     },
 
     updateTodo(id, content) {
-      // remove task item syntax that might be copied
-      const sanitizedContent = content.replace(/^- *(\[.*] ?)?/, "");
-
       const todo = this.todos.find((todo) => todo.id === id);
-      todo.content = sanitizedContent;
+      todo.content = sanitizeTodo(content);
     },
 
     updateTodosArray(todos) {
@@ -80,6 +92,30 @@ export const useTodosStore = defineStore({
       todo.dateCreated = new Date();
       this.todos.push(todo);
       this.archivedTodos = this.archivedTodos.filter((todo) => todo.id !== id);
+    },
+
+    async copyToClipboard() {
+      const todoArr = this.todos.map((todo) => {
+        return `- [${todo.completed ? "x" : " "}] ${todo.content}`;
+      });
+      try {
+        await navigator.clipboard.writeText(todoArr.join("\n"));
+        alert("List copied to clipboard");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async importFromClipboard() {
+      try {
+        const todoString = await navigator.clipboard.readText();
+        const todoArr = todoString.split("\n").filter((todo) => todo.length);
+
+        if (window.confirm(`Add the following items to list?\n${todoString}`)) {
+          todoArr.forEach((todo) => this.createTodo(todo));
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 });
