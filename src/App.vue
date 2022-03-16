@@ -43,9 +43,10 @@ const logout = async () => {
 }
 
 :root {
-  --primary-color: rgb(123, 166, 231);
-  --low-priority-color: rgb(156, 163, 175);
-  --highlight-color: rgb(209, 213, 219);
-  --highlight-color-focus: rgb(77, 98, 131);
+  --primary-color: hsl(216, 69%, 69%);
+  --primary-color-light: hsl(216, 69%, 80%);
+  --low-priority-color: hsl(218, 11%, 65%);
+  --highlight-color: hsl(216, 12%, 84%);
+  --highlight-color-focus: hsl(217, 26%, 41%);
 }
 </style>

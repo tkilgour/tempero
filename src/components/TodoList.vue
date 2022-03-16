@@ -6,7 +6,7 @@
       :animation="100"
       handle=".drag-handle"
       tag="transition-group"
-      :component-data="{ tag: 'ul', name: 'todo-list', type: 'transition' }"
+      :component-data="{ tag: 'ul', name: 'todo-list', type: 'animation' }"
     >
       <template #item="{ element }">
         <TodoItem :todo="element" :key="element.id" />
@@ -97,33 +97,30 @@ export default {
   font-size: 2rem;
   line-height: 1;
   border-radius: 50%;
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-light);
   color: #fff;
   transform: scale(1);
-  opacity: 0.7;
   transition: all 200ms ease;
 
   &:hover,
   &:focus {
     transform: scale(1.1);
-    opacity: 1;
+    background-color: var(--primary-color);
   }
 }
 
-.todo-list-leave {
-  opacity: 1;
+.todo-list-enter-active {
+  animation: pop-out 200ms ease-out reverse;
 }
 
 .todo-list-leave-active {
-  --timing: 300ms;
-  animation: pop-out var(--timing) ease-out;
-  transition: opacity var(--timing);
-  opacity: 0;
+  animation: pop-out 300ms ease-out;
 }
 
 @keyframes pop-out {
   from {
     transform: scale(1);
+    opacity: 1;
   }
 
   33% {
@@ -132,6 +129,7 @@ export default {
 
   to {
     transform: scale(0.92);
+    opacity: 0;
   }
 }
 </style>

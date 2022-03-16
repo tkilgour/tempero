@@ -1,5 +1,5 @@
 <template>
-  <li class="todo-item" :class="{ editing }">
+  <li class="todo-item">
     <!-- If today, show checkbox -->
     <div
       v-if="!archived"
@@ -34,7 +34,7 @@
       </svg>
     </button>
 
-    <p class="todo-content" :class="checked ? 'checked' : ''">
+    <p class="todo-content" :class="{ checked }">
       <span
         :contenteditable="!archived && !checked"
         :tabindex="!archived && !checked"
@@ -90,12 +90,6 @@ export default {
     DeleteButton,
   },
 
-  data() {
-    return {
-      editing: false,
-    };
-  },
-
   computed: {
     checked: {
       get() {
@@ -116,12 +110,7 @@ export default {
       "refreshArchivedTodo",
     ]),
 
-    handleFocus() {
-      this.editing = true;
-    },
-
     handleBlur(e) {
-      this.editing = false;
       const newTodoContent = e.target.innerText;
 
       if (!newTodoContent) {
@@ -174,12 +163,6 @@ export default {
   gap: 1rem;
   margin-bottom: 1rem;
   position: relative;
-  transform: scale(1);
-  transition: transform 150ms ease-in-out;
-
-  &.editing {
-    transform: scale(1.03);
-  }
 
   @media (min-width: 768px) {
     margin-bottom: 0.75rem;
@@ -243,7 +226,7 @@ export default {
   line-height: 1.75rem;
   min-height: 1.5em;
   opacity: 1;
-  transition: opacity calc(350ms) ease;
+  transition: opacity 350ms ease;
 
   @media (min-width: 768px) {
     font-size: 1rem;
