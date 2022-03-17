@@ -179,7 +179,7 @@ export default defineComponent({
     display: grid;
     place-items: center;
     transform: translateY(0);
-    transition: transform 200ms ease;
+    transition: transform var(--transition-timing) ease;
 
     &:hover,
     &:focus {
@@ -192,13 +192,13 @@ export default defineComponent({
 
 .fade-down-enter-active,
 .fade-down-leave-active {
-  transition: all 300ms ease-in;
+  transition: all var(--transition-timing) ease;
 }
 
 .fade-down-enter-from,
 .fade-down-leave-to {
   opacity: 0;
-  transform: translateX(3rem);
+  transform: translateX(1rem);
 }
 
 @media (min-width: 768px) {

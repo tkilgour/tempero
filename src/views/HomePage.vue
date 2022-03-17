@@ -54,6 +54,9 @@ export default defineComponent({
   margin-inline: auto;
   padding-inline: 1rem;
   min-height: 100vh;
+  // small viewport height:
+  /* https://www.bram.us/2021/07/08/the-large-small-and-dynamic-viewports/ */
+  min-height: 100svh;
   position: relative;
 }
 

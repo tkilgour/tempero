@@ -95,7 +95,7 @@ const closeDrawer = () => {
 }
 
 .drawer-header {
-  padding-block: 1rem;
+  padding-block: 0.5rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
   text-align: center;

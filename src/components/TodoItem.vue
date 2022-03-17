@@ -188,7 +188,7 @@ export default defineComponent({
   box-shadow: var(--bg-color) 0 0 0 2px,
     var(--highlight-color) 0 0 0 var(--ring-width), rgba(0, 0, 0, 0) 0 0 0 0;
   border-radius: 50%;
-  transition: box-shadow 200ms ease;
+  transition: box-shadow var(--transition-timing) ease;
 
   &:focus-within,
   &:hover {
@@ -216,7 +216,7 @@ export default defineComponent({
   align-self: start;
   color: var(--highlight-color);
   transform: scale(1);
-  transition: transform 200ms ease;
+  transition: transform var(--transition-timing) ease;
 
   &:hover,
   &:focus {
@@ -261,12 +261,13 @@ export default defineComponent({
   align-items: center;
   transform: translateX(0);
   opacity: 1;
-  transition: transform 200ms ease, opacity 200ms ease;
+  transition: transform var(--transition-timing) ease,
+    opacity var(--transition-timing) ease;
 
   .drag-handle {
     cursor: grab;
     opacity: 1;
-    transition: opacity 200ms ease;
+    transition: opacity var(--transition-timing) ease;
 
     &.hide {
       opacity: 0;

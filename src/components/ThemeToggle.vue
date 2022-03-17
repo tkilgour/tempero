@@ -98,7 +98,7 @@ export default defineComponent({
   }
 
   transform: translateY(0);
-  transition: transform 200ms ease;
+  transition: transform var(--transition-timing) ease;
 
   &:hover,
   &:focus {

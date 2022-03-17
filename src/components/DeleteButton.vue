@@ -33,7 +33,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .delete-button {
   transform: scale(1);
-  transition: transform 200ms ease;
+  transition: transform var(--transition-timing) ease;
 
   &:hover,
   &:focus {

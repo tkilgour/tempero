@@ -17,6 +17,8 @@ body,
 }
 
 :root {
+  --transition-timing: 200ms;
+
   &[data-theme="light"] {
     --bg-color: hsl(0, 0%, 100%);
     --text-color: hsl(0, 0%, 9%);

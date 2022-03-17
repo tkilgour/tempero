@@ -118,7 +118,7 @@ export default defineComponent({
   background-color: var(--primary-color-light);
   color: var(--bg-color);
   transform: scale(1);
-  transition: all 200ms ease;
+  transition: all var(--transition-timing) ease;
 
   &:hover,
   &:focus {
