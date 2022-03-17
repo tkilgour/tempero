@@ -3,19 +3,22 @@
     <a href="#content" class="skip-link">Skip to Content</a>
     <TodoHeader />
     <TodoList />
+    <TodoArchive />
   </div>
 </template>
 
 <script>
 import { mapActions } from "pinia";
 import { useTodosStore } from "@/stores/todos";
-import TodoList from "@/components/TodoList.vue";
 import TodoHeader from "../components/TodoHeader.vue";
+import TodoList from "@/components/TodoList.vue";
+import TodoArchive from "@/components/TodoArchive.vue";
 
 export default {
   components: {
     TodoList,
     TodoHeader,
+    TodoArchive,
   },
 
   methods: {
@@ -49,6 +52,8 @@ export default {
   max-width: 36rem;
   margin-inline: auto;
   padding-inline: 1rem;
+  min-height: 100vh;
+  position: relative;
 }
 
 .skip-link {

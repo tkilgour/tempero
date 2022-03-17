@@ -213,6 +213,16 @@ export default {
   font-size: 1.5rem;
   line-height: 1;
   align-self: start;
+  color: var(--highlight-color);
+  transform: scale(1);
+  transition: transform 200ms ease;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    transform: scale(1.2);
+    color: var(--primary-color-light);
+  }
 }
 
 .todo-content {

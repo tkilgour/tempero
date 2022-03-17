@@ -38,15 +38,6 @@
         />
       </svg>
     </button>
-    <h2 v-if="archivedTodos.length" class="h2">Archived</h2>
-    <ul>
-      <TodoItem
-        v-for="todo in archivedTodos"
-        :key="todo.id"
-        :todo="todo"
-        archived
-      />
-    </ul>
   </main>
 </template>
 
@@ -69,7 +60,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodosStore, ["todos", "archivedTodos"]),
+    ...mapState(useTodosStore, ["todos"]),
 
     mutatableTodos: {
       get() {
@@ -85,8 +76,9 @@ export default {
 
 <style lang="scss" scoped>
 .todo-list {
+  flex: 1;
   margin-top: 2rem;
-  padding-bottom: 3rem;
+  padding-bottom: 4rem;
   grid-column-start: span 3;
 }
 
@@ -115,7 +107,7 @@ export default {
   position: fixed;
   width: 4rem;
   height: 4rem;
-  bottom: 2rem;
+  bottom: 6rem;
   right: 2rem;
   display: grid;
   place-items: center;
@@ -129,6 +121,7 @@ export default {
 
   &:hover,
   &:focus {
+    outline: none;
     transform: scale(1.1);
     background-color: var(--primary-color);
   }
