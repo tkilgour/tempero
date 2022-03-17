@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="text-4xl text-center mt-4">Tempero</h1>
+    <h1 class="h1">Tempero</h1>
     <TodoList />
   </main>
 </template>
@@ -41,4 +41,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.h1 {
+  font-size: 2.75rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+</style>
