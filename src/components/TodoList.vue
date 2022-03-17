@@ -1,6 +1,6 @@
 <template>
   <main id="content" class="todo-list">
-    <p class="no-content" v-if="!this.todos.length">
+    <p class="no-content" v-if="!todos.length">
       Tap the + button<span class="no-mobile">, or just start typing</span> to
       get started!
     </p>
@@ -41,14 +41,15 @@
   </main>
 </template>
 
-<script>
+<script lang="ts">
 import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "../stores/todos";
 import { useUiStore } from "../stores/ui";
 import TodoItem from "./TodoItem.vue";
 import draggable from "vuedraggable";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   components: {
     TodoItem,
     draggable,
@@ -71,7 +72,7 @@ export default {
       },
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

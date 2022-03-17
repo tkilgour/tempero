@@ -43,10 +43,9 @@
     >
       <span
         :contenteditable="!archived && !checked"
-        :tabindex="!archived && !checked"
+        :tabindex="!archived && !checked ? 1 : 0"
         class="todo-content__inner"
         ref="todo-content"
-        @focus="handleFocus"
         @blur="handleBlur"
         @keydown="handleKeydown"
       >
@@ -81,13 +80,14 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "../stores/todos";
 import { useUiStore } from "../stores/ui";
 import DeleteButton from "@/components/DeleteButton.vue";
 
-export default {
+export default defineComponent({
   props: {
     todo: {
       type: Object,
@@ -166,7 +166,7 @@ export default {
       contentElem.focus();
     }
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

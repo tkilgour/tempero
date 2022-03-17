@@ -93,13 +93,14 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { useUiStore } from "@/stores/ui";
 import { useTodosStore } from "@/stores/todos";
 import ThemeToggle from "../components/ThemeToggle.vue";
 
-export default {
+export default defineComponent({
   components: {
     ThemeToggle,
   },
@@ -116,7 +117,7 @@ export default {
   computed: {
     ...mapState(useUiStore, ["showSettings"]),
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

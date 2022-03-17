@@ -18,11 +18,6 @@ const router = createRouter({
       path: "/login",
       component: () => import("../views/LoginPage.vue"),
     },
-    {
-      name: "Feed",
-      path: "/feed",
-      component: () => import("../views/FeedPage.vue"),
-    },
   ],
 });
 

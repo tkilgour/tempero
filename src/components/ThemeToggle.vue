@@ -1,7 +1,7 @@
 <template>
   <button
     class="theme-toggle"
-    :aria-label="`Switch to ${this.theme === 'light' ? 'dark' : 'light'} theme`"
+    :aria-label="`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`"
     @click="toggleTheme"
   >
     <Transition name="sunset">
@@ -44,8 +44,10 @@
   </button>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   data() {
     return {
       theme: null,
@@ -77,7 +79,7 @@ export default {
   mounted() {
     document.querySelector(":root").setAttribute("data-theme", this.theme);
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

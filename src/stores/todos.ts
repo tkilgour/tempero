@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
 
-const isToday = (someDateStr) => {
+const isToday = (someDateStr: string) => {
   const today = new Date();
   const someDate = new Date(someDateStr);
   return (
@@ -11,9 +11,9 @@ const isToday = (someDateStr) => {
   );
 };
 
-const sanitizeTodo = (todo) => {
+const sanitizeTodo = (todoString: string) => {
   // remove task item syntax that might be copied
-  return todo.replace(/^- *(\[.*] ?)?/, "");
+  return todoString.replace(/^- *(\[.*] ?)?/, "");
 };
 
 export const useTodosStore = defineStore({
@@ -23,7 +23,7 @@ export const useTodosStore = defineStore({
     archivedTodos: useStorage("archivedTodos", []),
   }),
   actions: {
-    createTodo(content, completed = false) {
+    createTodo(content: string, completed = false) {
       this.todos.push({
         id: Date.now(),
         content: sanitizeTodo(content),
@@ -43,12 +43,12 @@ export const useTodosStore = defineStore({
       });
     },
 
-    setTodoCompleted(id, val) {
-      const todo = this.todos.find((todo) => todo.id === id);
+    setTodoCompleted(id, val: boolean) {
+      const todo: Todo = this.todos.find((todo: Todo) => todo.id === id);
       todo.completed = val;
     },
 
-    updateTodo(id, content) {
+    updateTodo(id, content: string) {
       const todo = this.todos.find((todo) => todo.id === id);
       todo.content = sanitizeTodo(content);
     },

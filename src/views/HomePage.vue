@@ -7,14 +7,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapActions } from "pinia";
 import { useTodosStore } from "@/stores/todos";
 import TodoHeader from "../components/TodoHeader.vue";
 import TodoList from "@/components/TodoList.vue";
 import TodoArchive from "@/components/TodoArchive.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   components: {
     TodoList,
     TodoHeader,
@@ -44,7 +45,7 @@ export default {
   beforeUnmount() {
     document.removeEventListener("keydown", this._keyListener);
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

@@ -17,15 +17,17 @@
   </button>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   props: {
     content: {
       type: String,
       required: true,
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

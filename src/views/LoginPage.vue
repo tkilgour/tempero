@@ -8,7 +8,7 @@
   <p v-if="errorMessage">{{ errorMessage }}</p>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
@@ -23,7 +23,7 @@ const login = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
       console.log("Successfully logged in!");
-      router.push({ name: "Feed" });
+      router.push({ name: "Home" });
     })
     .catch((error) => {
       switch (error.code) {
