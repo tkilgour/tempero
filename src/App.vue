@@ -51,7 +51,7 @@ body,
   &[data-theme="light"] {
     --bg-color: hsl(0, 0%, 100%);
     --text-color: hsl(0, 0%, 9%);
-    --primary-color: hsl(209, 62%, 50%);
+    --primary-color: hsl(209, 62%, 45%);
     --primary-color-light: hsl(209, 62%, 65%);
     --low-priority-color: hsl(218, 11%, 65%);
     --highlight-color: hsl(210, 2%, 66%);

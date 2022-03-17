@@ -1,16 +1,19 @@
 <template>
   <div
     class="drawer"
-    v-if="todoStore.archivedTodos.length"
+    v-if="archiveLength"
     v-on-click-outside="closeDrawer"
     @keydown.esc="closeDrawer"
   >
     <button
-      v-if="todoStore.archivedTodos.length"
+      v-if="archiveLength"
       class="drawer-header"
+      :aria-label="`Archive - ${archiveLength} item${
+        archiveLength > 1 ? 's' : ''
+      }`"
       @click="toggleDrawer"
     >
-      <div>Archive ({{ todoStore.archivedTodos.length }})</div>
+      <div>Archive ({{ archiveLength }})</div>
     </button>
     <Transition name="pop">
       <section class="content-wpr" :aria-expanded="expanded" v-show="expanded">
@@ -48,13 +51,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useTodosStore } from "../stores/todos";
 import { vOnClickOutside } from "@vueuse/components";
 import TodoItem from "./TodoItem.vue";
 
 const todoStore = useTodosStore();
-// const { archivedTodos } = todoStore;
+const archiveLength = computed(() => {
+  return todoStore.archivedTodos.length;
+});
 const expanded = ref(false);
 
 const toggleDrawer = () => {
@@ -95,9 +100,9 @@ const closeDrawer = () => {
   line-height: 1.75rem;
   text-align: center;
   text-decoration: none;
+  color: var(--primary-color);
 
   & > * {
-    color: var(--primary-color-light);
     transform: scale(1);
     transition: all 200ms ease;
   }
@@ -107,7 +112,6 @@ const closeDrawer = () => {
     outline: none;
 
     & > * {
-      color: var(--primary-color);
       transform: scale(1.1);
     }
   }
