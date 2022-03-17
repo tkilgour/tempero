@@ -16,7 +16,7 @@
       v-else
       class="refresh-btn"
       title="Add to Today's List"
-      @click="refreshArchivedTodo(todo.id)"
+      @click="todosStore.refreshArchivedTodo(todo.id)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@
         :contenteditable="!archived && !checked"
         :tabindex="!archived && !checked ? 1 : 0"
         class="todo-content__inner"
-        ref="todo-content"
+        ref="content"
         @blur="handleBlur"
         @keydown="handleKeydown"
       >
@@ -55,11 +55,11 @@
     <div
       v-if="!archived"
       class="edit-wpr"
-      :class="{ hide: !showSettings }"
-      @click="resetSettingsTimeout"
+      :class="{ hide: !todosStore.showSettings }"
+      @click="todosStore.resetSettingsTimeout"
     >
-      <DeleteButton :content="todo.content" @click="deleteTodo(todo.id)" />
-      <div class="drag-handle" :class="{ hide: !showSettings }">
+      <DeleteButton :content="todo.content" @click="todosStore.deleteTodo(todo.id)" />
+      <div class="drag-handle" :class="{ hide: !todosStore.showSettings }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6"
@@ -80,93 +80,150 @@
   </li>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { mapActions, mapState } from "pinia";
+<script setup lang="ts">
+import { computed, defineComponent, onMounted, ref } from "vue";
+// import { mapActions, mapState } from "pinia";
 import { useTodosStore } from "../stores/todos";
 import { useUiStore } from "../stores/ui";
 import DeleteButton from "@/components/DeleteButton.vue";
 
-export default defineComponent({
-  props: {
-    todo: {
-      type: Object,
-      required: true,
-    },
-    archived: {
-      type: Boolean,
-      default: false,
-    },
+const todosStore = useTodosStore();
+
+const props = defineProps<{
+  todo: Todo
+  archived?: boolean
+}>()
+
+const content = ref(null)
+
+const checked = computed({
+  get() {
+    return props.todo.completed
   },
+  set(val: boolean) {
+    todosStore.setTodoCompleted(props.todo.id, val)
+  }
+})
 
-  components: {
-    DeleteButton,
-  },
+const handleBlur = (e: Event) => {
+  const newTodoContent = e.target.innerText;
 
-  computed: {
-    ...mapState(useUiStore, ["showSettings"]),
+  if (!newTodoContent) {
+    todosStore.deleteTodo(props.todo.id);
+  } else {
+    todosStore.updateTodo(props.todo.id, newTodoContent);
+  }
+}
 
-    checked: {
-      get() {
-        return this.todo.completed;
-      },
-      set(val) {
-        this.setTodoCompleted(this.todo.id, val);
-      },
-    },
-  },
-
-  methods: {
-    ...mapActions(useTodosStore, [
-      "setTodoCompleted",
-      "createEmptyTodo",
-      "updateTodo",
-      "deleteTodo",
-      "refreshArchivedTodo",
-    ]),
-    ...mapActions(useUiStore, ["resetSettingsTimeout"]),
-
-    handleBlur(e) {
-      const newTodoContent = e.target.innerText;
-
-      if (!newTodoContent) {
-        this.deleteTodo(this.todo.id);
-      } else {
-        this.updateTodo(this.todo.id, newTodoContent);
+const handleKeydown = (e: KeyboardEvent) => {
+  e.stopPropagation();
+  switch (e.key) {
+    case "Enter":
+      e.preventDefault();
+      todosStore.createEmptyTodo();
+      break;
+    case "Backspace":
+      if (!e.target.innerText) {
+        todosStore.deleteTodo(props.todo.id);
       }
-    },
+      break;
+    case "Escape":
+      content.value?.blur();
+      break;
+  }
+}
 
-    handleKeydown(e) {
-      e.stopPropagation();
-      switch (e.key) {
-        case "Enter":
-          e.preventDefault();
-          this.createEmptyTodo();
-          break;
-        case "Backspace":
-          if (!e.target.innerText) {
-            this.deleteTodo(this.todo.id);
-          }
-          break;
-        case "Escape":
-          this.$refs["todo-content"].blur();
-          break;
-      }
-    },
-  },
+onMounted(() => {
+  content.value?.style.setProperty(
+    "--todo-item-length",
+    props.todo.content.length
+  );
 
-  mounted() {
-    const contentElem = this.$refs["todo-content"];
-    contentElem.style.setProperty(
-      "--todo-item-length",
-      this.todo.content.length
-    );
+  if (!props.todo.content) {
+    content.value?.focus();
+  }
+})
 
-    if (!this.todo.content) {
-      contentElem.focus();
-    }
-  },
-});
+// export default defineComponent({
+//   props: {
+//     todo: {
+//       type: Object,
+//       required: true,
+//     },
+//     archived: {
+//       type: Boolean,
+//       default: false,
+//     },
+//   },
+
+//   components: {
+//     DeleteButton,
+//   },
+
+//   computed: {
+//     ...mapState(useUiStore, ["todosStore.showSettings"]),
+
+//     checked: {
+//       get() {
+//         return this.todo.completed;
+//       },
+//       set(val) {
+//         this.setTodoCompleted(this.todo.id, val);
+//       },
+//     },
+//   },
+
+//   methods: {
+//     ...mapActions(useTodosStore, [
+//       "setTodoCompleted",
+//       "createEmptyTodo",
+//       "updateTodo",
+//       "deleteTodo",
+//       "refreshArchivedTodo",
+//     ]),
+//     ...mapActions(useUiStore, ["resetSettingsTimeout"]),
+
+//     handleBlur(e) {
+//       const newTodoContent = e.target.innerText;
+
+//       if (!newTodoContent) {
+//         this.deleteTodo(this.todo.id);
+//       } else {
+//         this.updateTodo(this.todo.id, newTodoContent);
+//       }
+//     },
+
+//     handleKeydown(e) {
+//       e.stopPropagation();
+//       switch (e.key) {
+//         case "Enter":
+//           e.preventDefault();
+//           this.createEmptyTodo();
+//           break;
+//         case "Backspace":
+//           if (!e.target.innerText) {
+//             this.deleteTodo(this.todo.id);
+//           }
+//           break;
+//         case "Escape":
+//           this.$refs["todo-content"].blur();
+//           break;
+//       }
+//     },
+//   },
+
+//   mounted() {
+//     const contentElem = this.$refs["todo-content"];
+//     contentElem.style.setProperty(
+//       "--todo-item-length",
+//       this.todo.content.length
+//     );
+
+//     if (!this.todo.content) {
+//       contentElem.focus();
+//     }
+//   },
+// });
 </script>
 
 <style scoped lang="scss">
