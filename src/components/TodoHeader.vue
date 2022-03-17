@@ -66,6 +66,26 @@
               />
             </svg>
           </button>
+          <button
+            class="archive-btn btn"
+            title="Archive Todos"
+            @click="archiveAllTodos"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+              />
+            </svg>
+          </button>
           <ThemeToggle />
         </div>
       </Transition>
@@ -86,7 +106,11 @@ export default {
 
   methods: {
     ...mapActions(useUiStore, ["toggleSettings"]),
-    ...mapActions(useTodosStore, ["copyToClipboard", "importFromClipboard"]),
+    ...mapActions(useTodosStore, [
+      "copyToClipboard",
+      "importFromClipboard",
+      "archiveAllTodos",
+    ]),
   },
 
   computed: {

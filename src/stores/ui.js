@@ -15,10 +15,9 @@ export const useUiStore = defineStore({
     },
     resetSettingsTimeout() {
       this.clearSettingsTimeout();
-      // TODO: re-enable this
-      // this.settingsTimeout = setTimeout(() => {
-      //   this.showSettings = false;
-      // }, 20000);
+      this.settingsTimeout = setTimeout(() => {
+        this.showSettings = false;
+      }, 20000);
     },
     clearSettingsTimeout() {
       clearTimeout(this.settingsTimeout);

@@ -94,6 +94,25 @@ export const useTodosStore = defineStore({
       this.archivedTodos = this.archivedTodos.filter((todo) => todo.id !== id);
     },
 
+    deleteAllArchivedTodos() {
+      if (window.confirm(`Are you sure you want to clear the archive?`)) {
+        this.archivedTodos = [];
+      }
+    },
+
+    archiveAllTodos() {
+      if (window.confirm(`Are you sure you want to archive all todos?`)) {
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        this.todos = this.todos.map((todo) => {
+          return { ...todo, dateCreated: yesterday };
+        });
+        this.archiveTodos();
+      }
+    },
+
     async copyToClipboard() {
       const todoArr = this.todos.map((todo) => {
         return `- [${todo.completed ? "x" : " "}] ${todo.content}`;
