@@ -39,6 +39,7 @@
       :aria-label="todo.content"
       class="todo-content"
       :class="{ checked }"
+      @click="(e) => e.preventDefault()"
     >
       <span
         :contenteditable="!archived && !checked"
