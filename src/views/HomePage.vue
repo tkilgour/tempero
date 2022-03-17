@@ -38,8 +38,12 @@ export default defineComponent({
     };
     document.addEventListener("keydown", this._keyListener.bind(this));
 
-    //  TODO: update on date change if app is left running (set a timer? interval?)
     this.archiveTodos();
+
+    // run archive function every hour
+    setInterval(() => {
+      this.archiveTodos();
+    }, 1000 * 60 * 60);
   },
 
   beforeUnmount() {
