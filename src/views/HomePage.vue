@@ -3,6 +3,7 @@
     <a href="#content" class="skip-link">Skip to Content</a>
     <TodoHeader />
     <TodoList />
+    <CreateButton />
     <TodoArchive />
   </div>
 </template>
@@ -13,6 +14,7 @@ import { useTodosStore } from "@/stores/todos";
 import TodoHeader from "../components/TodoHeader.vue";
 import TodoList from "@/components/TodoList.vue";
 import TodoArchive from "@/components/TodoArchive.vue";
+import CreateButton from "@/components/CreateButton.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -20,6 +22,7 @@ export default defineComponent({
     TodoList,
     TodoHeader,
     TodoArchive,
+    CreateButton,
   },
 
   methods: {
