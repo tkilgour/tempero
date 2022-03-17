@@ -165,7 +165,7 @@ export default defineComponent({
 
   & > * {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 1rem;
     position: absolute;
     top: 0;
