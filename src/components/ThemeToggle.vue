@@ -1,6 +1,6 @@
 <template>
   <button
-    class="theme-toggle"
+    class="theme-btn btn"
     :aria-label="`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`"
     @click="toggleTheme"
   >
@@ -83,7 +83,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.theme-toggle {
+.theme-btn {
   position: relative;
   padding-bottom: 4px;
   display: flex;
@@ -95,16 +95,6 @@ export default defineComponent({
 
   .icon {
     position: absolute;
-  }
-
-  transform: translateY(0);
-  transition: transform var(--transition-timing) ease;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    transform: translateY(-0.2rem);
-    color: var(--primary-color-light);
   }
 }
 

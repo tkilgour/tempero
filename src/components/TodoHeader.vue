@@ -27,7 +27,7 @@
       <Transition name="fade-down">
         <div v-show="showSettings">
           <button
-            class="import-btn btn"
+            class="header-btn btn"
             title="Import from Clipboard"
             @click="importFromClipboard"
           >
@@ -47,7 +47,7 @@
             </svg>
           </button>
           <button
-            class="copy-btn btn"
+            class="header-btn btn"
             title="Copy to Clipboard"
             @click="copyToClipboard"
           >
@@ -67,7 +67,7 @@
             </svg>
           </button>
           <button
-            class="archive-btn btn"
+            class="header-btn btn"
             title="Archive Todos"
             @click="archiveAllTodos"
           >
@@ -174,19 +174,10 @@ export default defineComponent({
     left: 0;
   }
 
-  .btn {
+  .header-btn {
     width: 3rem;
     display: grid;
     place-items: center;
-    transform: translateY(0);
-    transition: transform var(--transition-timing) ease;
-
-    &:hover,
-    &:focus {
-      outline: none;
-      transform: translateY(-0.2rem);
-      color: var(--primary-color-light);
-    }
   }
 }
 

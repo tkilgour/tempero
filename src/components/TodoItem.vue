@@ -14,7 +14,7 @@
     <!-- Else it's archived, so show add to today's list button -->
     <button
       v-else
-      class="refresh-btn"
+      class="refresh-btn btn"
       title="Add to Today's List"
       @click="refreshArchivedTodo(todo.id)"
     >
@@ -215,15 +215,6 @@ export default defineComponent({
   line-height: 1;
   align-self: start;
   color: var(--highlight-color);
-  transform: scale(1);
-  transition: transform var(--transition-timing) ease;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    transform: scale(1.2);
-    color: var(--primary-color-light);
-  }
 }
 
 .todo-content {

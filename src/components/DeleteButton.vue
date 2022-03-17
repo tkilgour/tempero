@@ -1,5 +1,5 @@
 <template>
-  <button class="delete-button" :title="`Delete ${content}`">
+  <button class="btn" :title="`Delete ${content}`">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-6 w-6"
@@ -29,17 +29,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss" scoped>
-.delete-button {
-  transform: scale(1);
-  transition: transform var(--transition-timing) ease;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    transform: scale(1.2);
-    color: var(--primary-color-light);
-  }
-}
-</style>

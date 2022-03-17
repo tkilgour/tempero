@@ -40,6 +40,18 @@ body,
   }
 }
 
+.btn {
+  transform: scale(1);
+  transition: transform var(--transition-timing) ease;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    transform: scale(1.1);
+    color: var(--primary-color) !important;
+  }
+}
+
 @media screen and (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
