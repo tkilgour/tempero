@@ -4,11 +4,11 @@ A simple To Do app that acts as a daily list. Add and check off today's items â€
 
 ## In Progress
 
-- [ ] Remove archived todos
+- [x] Remove archived todos
 - [ ] Refresh app when the clock strikes midnight (or thereabouts). If the app is left open, Todos should be archived when user comes back the next day.
-- [ ] Keyboard control:
-  - [ ] capture typing a todo immediately
-  - [ ] navigate, edit, and check items off quickly by keyboard
+- [x] Keyboard control:
+  - [x] capture typing a todo immediately
+  - [x] navigate, edit, and check items off quickly by keyboard
 
 ## Setup
 
