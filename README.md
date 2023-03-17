@@ -1,4 +1,4 @@
-# Todo Today
+# Tempero
 
 A simple To Do app that acts as a daily list. Add and check off today's items – tomorrow they disappear! Ok... well, they go into the _Archive_ for a day so you can re-add them easily to the next day's list. 
 
